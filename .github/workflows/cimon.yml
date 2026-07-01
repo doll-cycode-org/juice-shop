@@ -30,9 +30,8 @@ jobs:
           client-id: ${{ secrets.CIMON_CLIENT_ID }}
           secret: ${{ secrets.CIMON_SECRET }}
           prevent: false
-          hardening: true
-          hardening-tier: 2
           report-job-summary: true
+          report-pr-summary: true
           report-process-tree: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           allowed-hosts: |
