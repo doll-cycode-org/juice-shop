@@ -29,7 +29,12 @@ jobs:
         with:
           client-id: ${{ secrets.CIMON_CLIENT_ID }}
           secret: ${{ secrets.CIMON_SECRET }}
-          prevent: false  # set to true to block instead of detect
+          prevent: false
+          hardening: true
+          hardening-tier: 2
+          report-job-summary: true
+          report-process-tree: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           allowed-hosts: |
             registry.npmjs.org
             nodejs.org
