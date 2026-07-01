@@ -1,0 +1,49 @@
+name: "CIMON Security Monitoring"
+on:
+  push:
+    branches-ignore:
+      - l10n_develop
+      - gh-pages
+    paths-ignore:
+      - '*.md'
+      - 'LICENSE'
+    tags-ignore:
+      - '*'
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - 'LICENSE'
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  cimon:
+    name: "CI/CD Runtime Security"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Check out Git repository"
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+
+      - name: "CIMON - Start runtime security monitor"
+        uses: cycodelabs/cimon-action@v0
+        with:
+          client-id: ${{ secrets.CIMON_CLIENT_ID }}
+          secret: ${{ secrets.CIMON_SECRET }}
+          prevent: false  # set to true to block instead of detect
+          allowed-hosts: |
+            registry.npmjs.org
+            nodejs.org
+            github.com
+            api.github.com
+            objects.githubusercontent.com
+
+      - name: "Use Node.js 24"
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af #v4.1.0
+        with:
+          node-version: 24
+
+      - name: "Install application"
+        run: |
+          npm install --ignore-scripts
+          cd frontend
+          npm install --ignore-scripts
