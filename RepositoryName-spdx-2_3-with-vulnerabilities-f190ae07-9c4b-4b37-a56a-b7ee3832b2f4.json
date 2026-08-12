@@ -1,0 +1,18 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "spdx_version_string": null,
+  "creationInfo": {
+    "created": "2026-08-05T16:08:49Z",
+    "creators": [
+      "cycode.com-SBOM"
+    ]
+  },
+  "name": "RepositoryName",
+  "dataLicense": "NOASSERTION",
+  "documentDescribes": [
+    "SPDXRef-RepositoryName"
+  ],
+  "documentNamespace": "NOASSERTION",
+  "packages": []
+}

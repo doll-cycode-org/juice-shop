@@ -1,0 +1,4 @@
+exclusions:
+  sca:
+    cves:
+    - CVE-2015-9235
