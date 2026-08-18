@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        CIMON_CLIENT_ID = credentials("cimon-client-id")
-        CIMON_SECRET = credentials("cimon-secret")
+        CIMON_CLIENT_ID = credentials("CIMON_CLIENT_ID")
+        CIMON_SECRET = credentials("CIMON_SECRET")
         CIMON_ALLOWED_HOSTS = """
             registry.npmjs.org
             nodejs.org
