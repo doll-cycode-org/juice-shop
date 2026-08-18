@@ -36,14 +36,10 @@ pipeline {
             }
         }
 
-        stage('Use Node.js 24') {
-            steps {
-                sh 'curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -'
-                sh 'sudo apt-get install -y nodejs'
-            }
-        }
-
         stage('Install application') {
+            tools {
+                nodejs 'NodeJS 24'
+            }
             steps {
                 sh 'npm install --ignore-scripts'
                 sh 'cd frontend && npm install --ignore-scripts'
