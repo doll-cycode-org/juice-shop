@@ -27,13 +27,12 @@ jobs:
       - name: "CIMON - Start runtime security monitor"
         uses: cycodelabs/cimon-action@v0
         with:
-          client-id: ${{ secrets.CIMON_CLIENT_ID }}
-          secret: ${{ secrets.CIMON_SECRET }}
+          client-id: ${{ secrets.CYCODE_CLIENT_ID }}
+          secret: ${{ secrets.CYCODE_SECRET }}
           prevent: false
           report-job-summary: true
           report-pr-summary: true
           report-process-tree: true
-          CIMON_REPORT_PROCESS_TREE: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           allowed-hosts: |
             registry.npmjs.org
