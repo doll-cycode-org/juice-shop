@@ -53,7 +53,13 @@ pipeline {
 
     post {
         always {
-            sh 'sudo -E cimon agent stop'
+            script {
+                try {
+                    sh 'sudo -E cimon agent stop'
+                } catch (Throwable t) {
+                    echo "Skipping cimon agent stop: ${t.message}"
+                }
+            }
         }
     }
 }
