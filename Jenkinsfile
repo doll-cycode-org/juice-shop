@@ -36,10 +36,14 @@ pipeline {
             }
         }
 
-        stage('Install application') {
-            tools {
-                nodejs 'NodeJS 24'
+        stage('Use Node.js 24') {
+            steps {
+                sh 'curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -'
+                sh 'sudo apt-get install -y nodejs'
             }
+        }
+
+        stage('Install application') {
             steps {
                 sh 'npm install --ignore-scripts'
                 sh 'cd frontend && npm install --ignore-scripts'
@@ -49,7 +53,13 @@ pipeline {
 
     post {
         always {
-            sh 'sudo -E cimon agent stop'
+            script {
+                try {
+                    sh 'sudo -E cimon agent stop'
+                } catch (Throwable t) {
+                    echo "Skipping cimon agent stop: ${t.message}"
+                }
+            }
         }
     }
 }
