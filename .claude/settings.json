@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cycode ai-guardrails session-start --ide claude-code"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cycode ai-guardrails scan --ide claude-code"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cycode ai-guardrails scan --ide claude-code"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cycode ai-guardrails scan --ide claude-code"
+          }
+        ]
+      }
+    ]
+  }
+}
