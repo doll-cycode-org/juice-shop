@@ -50,7 +50,12 @@ def webhook():
 @app.route("/logs")
 def logs():
     # CWE-22: path traversal
-    return open(os.path.join("/var/log/app", request.args["file"])).read()
+    base_directory = "/var/log/app"
+    file_path = os.path.abspath(os.path.join(base_directory, request.args["file"]))
+    if file_path.startswith(base_directory):
+        return open(file_path).read()
+    else:
+        return "Invalid file path", 400
 
 
 if __name__ == "__main__":
