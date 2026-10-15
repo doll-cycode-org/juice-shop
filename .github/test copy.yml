@@ -1,0 +1,27 @@
+name: CI Example
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Unpinned: Tracks the latest minor/patch updates for major version 4
+      - name: Checkout repository
+        uses: hasicorp/setup-terraform@v2.0.3
+
+      # Unpinned: Tracks the latest changes directly on the main branch
+      - name: Set up Node.js
+        uses: actions/setup-node@main
+        with:
+          node-version: '20'
+
+      - name: Install dependencies and test
+        run: |
+          npm ci
+          npm test
