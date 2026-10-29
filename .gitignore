@@ -67,3 +67,6 @@ config/*.yml
 
 # System Files
 .DS_Store
+
+# Environment variables / secrets
+.env

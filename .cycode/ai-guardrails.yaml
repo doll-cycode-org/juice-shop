@@ -1,0 +1,29 @@
+version: 1
+mode: block
+fail_open: true
+secrets:
+  scan_type: secret
+  timeout_ms: 30000
+  max_bytes: 200000
+prompt:
+  enabled: true
+  action: block
+file_read:
+  enabled: true
+  action: block
+  deny_globs:
+  - .env
+  - .env.*
+  - '*.pem'
+  - '*.p12'
+  - '*.key'
+  - .aws/**
+  - .ssh/**
+  - '*kubeconfig*'
+  - .npmrc
+  - .netrc
+  scan_content: true
+mcp:
+  enabled: true
+  action: block
+  scan_arguments: true
