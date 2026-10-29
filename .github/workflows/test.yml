@@ -1,0 +1,27 @@
+name: Test Unpinned Third-Party Action Policy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  lint-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4.1.0
+
+      # Third-party action referenced by an arbitrary version tag rather than an immutable commit SHA
+      - name: Third-Party Action with Semver Tag
+        uses: peter-evans/create-pull-request@v6.0.2
+        with:
+          commit-message: "policy test"
+          title: "Automated Test PR"
+
+      # Additional example using an arbitrary custom version string
+      - name: Custom Third-Party Action with Arbitrary Tag
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          scan-type: "fs"
+          format: "table"
